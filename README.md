@@ -2,7 +2,7 @@
 
   <h1>The Rust and WebAssembly Book</h1>
 
-  <strong>이 작은 책에는  Rust와 WebAssembly를 사용하는 방법이 담겨 있습니다. 훌륭한 예제와 함께 말이죠..</strong>
+  <strong>이 작은 책에는  Rust와 WebAssembly를 사용하는 방법이 담겨 있습니다. 훌륭한 예제와 함께 말이죠.</strong>
 
   <strong>이 글은 다음 [레포](https://github.com/rustwasm/book)를 번역한 것입니다. </strong>
 
@@ -14,7 +14,8 @@
     <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
   </h3>
 
-  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
+  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub><br>
+  <sub>Translate into Korean with by <a href="github.com/esctabcapslock">esctabcapslock</a></sub>
 </div>
 
 ## About

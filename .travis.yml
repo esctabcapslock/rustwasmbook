@@ -1,21 +1,28 @@
 language: rust
+sudo: false
+cache:
+  - cargo
 
-# before_install:
-#   - curl -L https://github.com/rust-lang-nursery/mdBook/releases/download/v0.2.3/mdbook-v0.2.3-x86_64-unknown-linux-musl.tar.gz | tar xzf -
-#   - export PATH=$PATH:`pwd`
+rust:
+  - stable
 
-# Temporarily disable using pre-built binaries until
-# https://github.com/rust-lang-nursery/mdBook/issues/820 is fixed.
+branches:
+  only:
+  - master
+
 before_script:
-  - cargo install mdbook --version 0.2.3
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers "^0.2.3" mdbook)
+  - cargo install-update -a
 
 script:
-  - mv _theme theme
-  - mdbook build
+  - cd rustwasmbook && mdbook build && mdbook test && cd book && touch .nojekyll
 
 deploy:
-  provider: script
-  script: curl -LsSf https://git.io/fhJ8n | rustc - && (cd book && ../rust_out)
-  skip_cleanup: true
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: rustwasmbook/book
   on:
     branch: master
