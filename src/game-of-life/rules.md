@@ -1,4 +1,9 @@
-# Rules of Conway's Game of Life
+# 게임의 규칙
+<!-- # Rules of Conway's Game of Life -->
+
+*역자 주) [나무위키 해당 항목][namu]을 읽는 것을 추천. 번역 생략*
+
+[namu]: https://namu.wiki/w/%EC%BD%98%EC%9B%A8%EC%9D%B4%EC%9D%98%20%EC%83%9D%EB%AA%85%20%EA%B2%8C%EC%9E%84
 
 *Note: If you are already familiar with Conway's Game of Life and its rules,
 feel free to skip to the next section!*

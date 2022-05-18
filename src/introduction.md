@@ -1,36 +1,29 @@
-# Rust 🦀 and WebAssembly 🕸
+# Rust 🦀 와 WebAssembly 🕸
 
-This small book describes how to use [Rust][] and [WebAssembly][] together.
+이 작은 책에는  [Rust][]와 [WebAssembly][]를 사용하는 방법이 담겨 있습니다
 
-## Who is this book for?
+## 이 책은 누구를 위한 것인가요?
 
-This book is for anyone interested in compiling Rust to WebAssembly for fast,
-reliable code on the Web. You should know some Rust, and be familiar with
-JavaScript, HTML, and CSS. You don't need to be an expert in any of them.
+이 책은 웹에서 실행되는 쉽고 간편한 코드를 만들기 위해 Rust를 WebAssembly로 컴파일하는데 관심이 있는 여러분들 위한 책입니다. 당신은 약간의 Rust, 그리고 Javascript, HTML, 그리고 CSS를 익숙하게 다룰 수 있어야 합니다. 물론 이 언어들의 전문가일 필요는 없습니다.
 
-Don't know Rust yet? [Start with *The Rust Programming Language* first.][trpl]
+Rust에 대해 모른다면, [ *The Rust Programming Language*를 먼저 공부하세요!](https://rinthel.github.io/rust-lang-book-ko/)
 
-Don't know JavaScript, HTML, or CSS? [Learn about them on MDN.][mdn]
+JavaScript, HTML, 또는 CSS를 모른다면 [MDN을 참고하세요!][mdn]
 
-## How to read this book
+## 이 책을 어떻게 읽어야 하나요
 
-You should read [the motivation for using Rust and WebAssembly
-together][why-rust-wasm], as well as familiarize yourself with the [background
-and concepts][background] first.
+[왜 Rust와 WebAssembly안가요?][why-rust-wasm]를 읽은 뒤, [배경 및 개념][background]을 숙지하세요.
 
-The [tutorial][] is written to be read from start to finish. You should follow
-along: writing, compiling, and running the tutorial's code yourself. If you
-haven't used Rust and WebAssembly together before, do the tutorial!
+[참고문헌][reference] 은 어느 순서로 읽어도 좋습니다.
+<!-- The [reference sections][reference] may be perused in any order. -->
 
-The [reference sections][reference] may be perused in any order.
+> **💡 Tip:** 페이지 위에 있는 🔍 클릭하거나
+>  `s` 키를 눌러 검색할 수 있습니다.
 
-> **💡 Tip:** You can search through this book by clicking on the 🔍 icon at the
-> top of the page, or by pressing the `s` key.
+## 이 책에 기여하기
 
-## Contributing to this book
-
-This book is open source! Find a typo? Did we overlook something? [**Send us a
-pull request!**][repo]
+이 책은 오픈 소스입니다! 오타를 발견했나요? 무언가 오류를 발견했나요? [**우리에게
+pull request로 알려주세요!**][repo]
 
 [Rust]: https://www.rust-lang.org
 [WebAssembly]: https://webassembly.org/

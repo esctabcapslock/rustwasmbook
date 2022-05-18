@@ -1,15 +1,15 @@
 # Summary
 
-- [Introduction](./introduction.md)
-- [Why Rust and WebAssembly?](./why-rust-and-webassembly.md)
-- [Background And Concepts](./background-and-concepts.md)
-  - [What is WebAssembly?](./what-is-webassembly.md)
+- [소개](./introduction.md)
+- [왜 Rust와 WebAssembly안가요?](./why-rust-and-webassembly.md)
+- [배경 및 개념](./background-and-concepts.md)
+  - [WebAssembly란 무엇인가요?](./what-is-webassembly.md)
 --------------------------------------------------------------------------------
-- [Tutorial](./game-of-life/introduction.md)
-    - [Setup](./game-of-life/setup.md)
+- [튜토리얼: 콘웨이의 생명 게임](./game-of-life/introduction.md)
+    - [개발환경 구축](./game-of-life/setup.md)
     - [Hello, World!](./game-of-life/hello-world.md)
-    - [Rules](./game-of-life/rules.md)
-    - [Implementing Life](./game-of-life/implementing.md)
+    - [게임의 규칙](./game-of-life/rules.md)
+    - [게임 구현하기](./game-of-life/implementing.md)
     - [Testing Life](./game-of-life/testing.md)
     - [Debugging](./game-of-life/debugging.md)
     - [Adding Interactivity](./game-of-life/interactivity.md)

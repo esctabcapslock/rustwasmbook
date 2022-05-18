@@ -2,12 +2,14 @@
 
   <h1>The Rust and WebAssembly Book</h1>
 
-  <strong>This small book describes how to use Rust and WebAssembly together.  It also consists of tutorials with cool exercises.</strong>
+  <strong>이 작은 책에는  Rust와 WebAssembly를 사용하는 방법이 담겨 있습니다. 훌륭한 예제와 함께 말이죠..</strong>
+
+  <strong>이 글은 다음 [레포](https://github.com/rustwasm/book)를 번역한 것입니다. </strong>
 
   <h3>
-    <a href="https://rustwasm.github.io/docs/book/">Read the Book</a>
+    <a href="https://rustwasm.github.io/docs/book/">책 읽기</a>
     <span> | </span>
-    <a href="https://github.com/rustwasm/book/blob/master/CONTRIBUTING.md">Contributing</a>
+    <a href="https://github.com/rustwasm/book/blob/master/CONTRIBUTING.md">기여</a>
     <span> | </span>
     <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
   </h3>
@@ -17,11 +19,10 @@
 
 ## About
 
-This repo contains documentation on using Rust for wasm, common workflows, how
-to get started and more as you dive deeper. It acts as a guide for doing some really neat things with rust.
+이 레포지토리에는 WebAssembly와 Rust를 사용하는 법, 일반적인 워크플로우, 그리리고 어떻게 시작하는지 담겨 있습니다. 이것은 Rust를 통해 멋진 일을 할 수 있도록 당신을 도울 것입니다.
 
-If you would like to start learning how to use Rust and WebAssembly together,
- you can read the book [online here][book].
+
+만약 당장 WebAssembly와 Rust를 배우고 싶다면, 이 책을 [온라인][book]에서 읽을 수 있습니다.
 
 [Open issues for improving the Rust and WebAssembly book.][book-issues]
 
@@ -66,4 +67,4 @@ to read them then you can read them from the `src` directory.
 
 [mdbook]: https://github.com/rust-lang-nursery/mdBook
 [rustup]: https://github.com/rust-lang-nursery/rustup.rs/
-[book]: https://rustwasm.github.io/book/game-of-life/introduction.html
+[book]: https://esctabcapslock.github.io/rustwasmbook/game-of-life/introduction.html

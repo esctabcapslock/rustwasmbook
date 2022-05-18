@@ -1,4 +1,4 @@
-# Implementing Conway's Game of Life
+# 게임 구현하기
 
 ## Design
 
