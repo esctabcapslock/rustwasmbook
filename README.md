@@ -7,7 +7,7 @@
   <strong>이 글은 다음 [레포](https://github.com/rustwasm/book)를 번역한 것입니다. </strong>
 
   <h3>
-    <a href="https://rustwasm.github.io/docs/book/">책 읽기</a>
+    <a href="https://esctabcapslock.github.io/rustwasmbook/">책 읽기</a>
     <span> | </span>
     <a href="https://github.com/rustwasm/book/blob/master/CONTRIBUTING.md">기여</a>
     <span> | </span>
