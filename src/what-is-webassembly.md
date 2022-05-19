@@ -83,4 +83,4 @@ flavors (including both on the Web and [Node.js]). -->
 [S-expressions]: https://en.wikipedia.org/wiki/S-expression
 [wat2wasm 데모]: https://webassembly.github.io/wabt/demo/wat2wasm/
 
-[1^]: 나중에 같은 지점에서 계속될 수 있도록 저장해야 하는 작업에서 사용하는 최소 데이터 집합.
+[^1]: 역자 주) 나중에 같은 지점에서 계속될 수 있도록 저장해야 하는 작업에서 사용하는 최소 데이터 집합.

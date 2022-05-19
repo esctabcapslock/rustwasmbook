@@ -1,81 +1,77 @@
 # 게임 구현하기
 
-## Design
+## 디자인
+<!-- ## Design -->
 
-Before we dive in, we have some design choices to consider.
+들어가기 전에 고려해야 할 몇 가지 디자인 선택 사항이 있습니다.
+<!-- Before we dive in, we have some design choices to consider. -->
 
-### Infinite Universe
-
-The Game of Life is played in an infinite universe, but we do not have infinite
+### 무한한 세계
+<!-- ### Infinite Universe -->
+Game of Life는 무한한 세계에서 진행되지만 메모리와 컴퓨팅 파워는 무한하지 못합니다. 이 다소 성가신 제한을 해결하기 위해 일반적으로
+세 가지 방법 중 하나를 통해 제공됩니다.
+<!-- The Game of Life is played in an infinite universe, but we do not have infinite
 memory and compute power. Working around this rather annoying limitation usually
-comes in one of three flavors:
+comes in one of three flavors: -->
 
-1. Keep track of which subset of the universe has interesting things happening,
+<!-- 1. Keep track of which subset of the universe has interesting things happening,
    and expand this region as needed. In the worst case, this expansion is
    unbounded and the implementation will get slower and slower and eventually
-   run out of memory.
+   run out of memory. -->
+1.  우주의 어느 장소에서 흥미로운 일이 일어나고 있는지 추적하고,
+    필요에 따라 이 영역을 확장합니다. 최악의 경우 이 확장은
+    제한이 없기 때문에 구현이 점점 느려지고 결국
+    메모리 부족을 야기할 것입니다.
 
-2. Create a fixed-size universe, where cells on the edges have fewer neighbors
-   than cells in the middle. The downside with this approach is that infinite
-   patterns, like gliders, that reach the end of the universe are snuffed out.
-
-3. Create a fixed-size, periodic universe, where cells on the edges have
+2. 가장자리에 있는 셀의 인접한 셀의 수가 중간에 있는 세포보다  적은 고정된 크기의 세계를 만듦니다.
+    하지만 무한 글라이더처럼 세계의 끝에 도달하는 패턴이 제거된다는 단점이 있습니다.
+  <!-- 2. Create a fixed-size universe, where cells on the edges have fewer neighbors
+    than cells in the middle. The downside with this approach is that infinite
+    patterns, like gliders, that reach the end of the universe are snuffed out. -->
+3. 고정된 크기지만 반복되는 세계를 만듭니다. 여기에서 가장자리의 셀은 세계의 반대쪽 셀과 연결되어 있습니다. 따라서 글라이더는 영원히 계속 달릴 수 있습니다.
+<!-- 3. Create a fixed-size, periodic universe, where cells on the edges have
    neighbors that wrap around to the other side of the universe. Because
    neighbors wrap around the edges of the universe, gliders can keep running
-   forever.
+   forever. -->
 
-We will implement the third option.
+우리는 세 번째 방식을 구현할 것입니다.
+<!-- We will implement the third option. -->
 
-### Interfacing Rust and JavaScript
+### Rust와 JavaScript 연결하기
+<!-- ### Interfacing Rust and JavaScript -->
 
-> ⚡ This is one of the most important concepts to understand and take away from
-> this tutorial!
+> ⚡ 이것은 이 튜토리얼에서 이해해야 할 가장 중요한 개념 중 하나입니다!
+<!-- > ⚡ This is one of the most important concepts to understand and take away from
+> this tutorial! -->
 
-JavaScript's garbage-collected heap — where `Object`s, `Array`s, and DOM nodes
-are allocated — is distinct from WebAssembly's linear memory space, where our
-Rust values live. WebAssembly currently has no direct access to the
-garbage-collected heap (as of April 2018, this is expected to change with the
-["Interface Types" proposal][interface-types]). JavaScript, on the other hand, can
-read and write to the WebAssembly linear memory space, but only as an
-[`ArrayBuffer`][array-buf] of scalar values (`u8`, `i32`, `f64`,
-etc...). WebAssembly functions also take and return scalar values. These are the
-building blocks from which all WebAssembly and JavaScript communication is
-constituted.
+JavaScript의 garbage-collected heap(여기에 `Object`, `Array` 및 DOM 트리가 할당되어 있음) 공간은 Rust 값이 있는 WebAssembly의 선형 메모리 공간과 다릅니다. WebAssembly는 현재 garbage-collected heap에 직접 액세스할 수 없습니다(2018년 4월 현재 [인터페이스 유형][interface-types]으로 변경될 예정임). 반면 JavaScript는 WebAssembly 선형 메모리 공간을 읽고 쓸 수 있지만 스칼라 값(`u8`, `i32`, `f64` 등)의 [`ArrayBuffer`][array-buf]로만 가능합니다. ..). WebAssembly 함수는 스칼라 값도 사용하고 반환합니다. 이것들은 모든 WebAssembly 및 JavaScript 통신을 구성하는 빌딩 블록입니다.
+
+<!-- JavaScript's garbage-collected heap — where `Object`s, `Array`s, and DOM nodes are allocated — is distinct from WebAssembly's linear memory space, where our Rust values live. WebAssembly currently has no direct access to the garbage-collected heap (as of April 2018, this is expected to change with the ["Interface Types" proposal][interface-types]). JavaScript, on the other hand, can read and write to the WebAssembly linear memory space, but only as an [`ArrayBuffer`][array-buf] of scalar values (`u8`, `i32`, `f64`, etc...). WebAssembly functions also take and return scalar values. These are the building blocks from which all WebAssembly and JavaScript communication is constituted. -->
 
 [interface-types]: https://github.com/WebAssembly/interface-types/blob/master/proposals/interface-types/Explainer.md
 [array-buf]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
 
-`wasm_bindgen` defines a common understanding of how to work with compound
-structures across this boundary. It involves boxing Rust structures, and
-wrapping the pointer in a JavaScript class for usability, or indexing into a
-table of JavaScript objects from Rust. `wasm_bindgen` is very convenient, but it
-does not remove the need to consider our data representation, and what values
-and structures are passed across this boundary. Instead, think of it as a tool
-for implementing the interface design you choose.
+'wasm_bindgen'은 Rust와 WebAssembly의 경계를 넘어 복합한 구조를 작업하는 방법에 대한 일반적인 이해를 정의합니다. 여기에는 Rust 구조를 랩핑하고, 사용성을 위해 JavaScript 클래스에 포인터를 래핑하거나 Rust에 JavaScript 객체 테이블을 인덱싱하는 작업이 포함됩니다. `wasm_bindgen`은 매우 편리하지만 데이터 표현과 이 경계를 넘어 전달되는 값과 구조를 고려할 필요가 없습니다. 단지 인터페이스 디자인을 구현하기 위한 도구로 생각하십시오.
 
-When designing an interface between WebAssembly and JavaScript, we want to
-optimize for the following properties:
+<!-- `wasm_bindgen` defines a common understanding of how to work with compound structures across this boundary. It involves boxing Rust structures, and wrapping the pointer in a JavaScript class for usability, or indexing into a table of JavaScript objects from Rust. `wasm_bindgen` is very convenient, but it does not remove the need to consider our data representation, and what values and structures are passed across this boundary. Instead, think of it as a tool for implementing the interface design you choose. -->
 
+WebAssembly와 JavaScript 간의 인터페이스를 설계할 때 다음 속성을 고려하고자 합니다
+<!-- When designing an interface between WebAssembly and JavaScript, we want to optimize for the following properties: -->
+<!-- 
 1. **Minimizing copying into and out of the WebAssembly linear memory.**
-   Unnecessary copies impose unnecessary overhead.
+   Unnecessary copies impose unnecessary overhead. -->
 
-2. **Minimizing serializing and deserializing.** Similar to copies, serializing
-   and deserializing also imposes overhead, and often imposes copying as
-   well. If we can pass opaque handles to a data structure — instead of
-   serializing it on one side, copying it into some known location in the
-   WebAssembly linear memory, and deserializing on the other side — we can often
-   reduce a lot of overhead. `wasm_bindgen` helps us define and work with opaque
-   handles to JavaScript `Object`s or boxed Rust structures.
+1. **WebAssembly 선형 메모리의 복사를 최소화합니다.**
+  불필요한 복사는 불필요한 오버헤드를 야기합니다.
 
-As a general rule of thumb, a good JavaScript↔WebAssembly interface design is
-often one where large, long-lived data structures are implemented as Rust types
-that live in the WebAssembly linear memory, and are exposed to JavaScript as
-opaque handles. JavaScript calls exported WebAssembly functions that take these
-opaque handles, transform their data, perform heavy computations, query the
-data, and ultimately return a small, copy-able result. By only returning the
-small result of the computation, we avoid copying and/or serializing everything
-back and forth between the JavaScript garbage-collected heap and the WebAssembly
-linear memory.
+2. **직렬화[^1] 및 역직렬화 최소화.** 
+  복사와 마찬가지로 직렬화 및 역직렬화도 오버헤드를 부과하고 종종 복사도 부과합니다. 불투명 핸들을 데이터 구조에 전달할 수 있다면(한 쪽에서 직렬화한 뒤 WebAssembly 선형 메모리의 알려진 위치에 복사하고, 다른 쪽에서 역직렬화하는 대신) 많은 오버헤드를 줄일 수 있습니다. `wasm_bindgen`은 JavaScript `Object` 또는 boxed Rust 구조에 대한 불투명 핸들을 정의하기 때문에 작업에 도움이 됩니다
+
+<!-- 2. **Minimizing serializing and deserializing.** Similar to copies, serializing and deserializing also imposes overhead, and often imposes copying as well. If we can pass opaque handles to a data structure — instead of serializing it on one side, copying it into some known location in the WebAssembly linear memory, and deserializing on the other side — we can often reduce a lot of overhead. `wasm_bindgen` helps us define and work with opaque handles to JavaScript `Object`s or boxed Rust structures. -->
+
+일반적으로 좋은 JavaScript↔WebAssembly 인터페이스 디자인은 길고 수명이 긴 데이터 구조가 WebAssembly 선형 메모리에 있는 Rust 유형으로 구현되고 JavaScript에 불투명 핸들로 노출되는 경우가 많습니다. JavaScript는 이러한 불투명 핸들을 취하고, 데이터를 변환하고, 많은 계산을 수행하고, 데이터를 쿼리하고, 궁극적으로 복사 가능한 작은 결과를 반환하는 내보낸 WebAssembly 함수를 호출합니다. 계산의 작은 결과만 반환함으로써 JavaScript의 garbage-collected heap과 WebAssembly 선형 메모리 사이에서 양쪽으로 많은 것들을 복사 및/또는 직렬화하는 것을 피할 수 있습니다.
+
+<!-- As a general rule of thumb, a good JavaScript↔WebAssembly interface design is often one where large, long-lived data structures are implemented as Rust types that live in the WebAssembly linear memory, and are exposed to JavaScript as opaque handles. JavaScript calls exported WebAssembly functions that take these opaque handles, transform their data, perform heavy computations, query the data, and ultimately return a small, copy-able result. By only returning the small result of the computation, we avoid copying and/or serializing everything back and forth between the JavaScript garbage-collected heap and the WebAssembly linear memory. -->
 
 ### Interfacing Rust and JavaScript in our Game of Life
 
@@ -761,3 +757,7 @@ encourage you to go learn about hashlife on your own!
     ```
 
   </details>
+
+
+[^1]: 역자 주) 직렬화는 메모리를 디스크에 저장하거나 네트워크 통신에 사용하기 위한 형식으로 변환하는 것을 말한다. 참조 형식 데이터를 전송할 수는 없지 않는가?
+
