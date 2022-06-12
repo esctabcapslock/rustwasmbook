@@ -25,10 +25,10 @@ represent the same structures, albeit in different ways: -->
    directly by wasm virtual machines. It is conceptually similar to ELF and
    Mach-O. -->
 
-참고로 다음은 `wat`로 작성한 펙토리얼 함수입니다:
+참고로 다음은 `wat`로 작성한 펙토리얼 함수입니다:[^1]
 <!-- For reference, here is a factorial function in `wat`: -->
 
-```
+```wasm
 (module
   (func $fac (param f64) (result f64)
     local.get 0
@@ -65,7 +65,7 @@ single "linear memory", which is essentially a flat array of bytes. This
 <!-- ## Is WebAssembly Just for the Web? -->
 
 현재 일반적으로 JavaScript 및 웹 커뮤니티에서 주목을 받고 있지만 wasm은 실행 환경에 구예받지 않습니다. 따라서 wasm이 "portable executable"이 될 것이라고 추측하는 것이 합리적입니다.
-이는 향후 다양한 컨텍스트(context)[^1]에서 사용될 "실행 파일" 형식입니다.
+이는 향후 다양한 컨텍스트(context)[^2]에서 사용될 "실행 파일" 형식입니다.
 그러나, *아직은*  wasm은 대부분 JavaScript와 관련되어 있습니다. (웹 및 [Node.js] 모두 포함).
 
 <!-- Although it has currently gathered attention in the JavaScript and Web
@@ -83,4 +83,6 @@ flavors (including both on the Web and [Node.js]). -->
 [S-expressions]: https://en.wikipedia.org/wiki/S-expression
 [wat2wasm 데모]: https://webassembly.github.io/wabt/demo/wat2wasm/
 
-[^1]: 역자 주) 나중에 같은 지점에서 계속될 수 있도록 저장해야 하는 작업에서 사용하는 최소 데이터 집합.
+[^1]: 역자 주) 이 코드를 이해하고 싶다면 [이 글](https://developer.mozilla.org/ko/docs/WebAssembly/Understanding_the_text_format)을 참조하세요
+
+[^2]: 역자 주) 나중에 같은 지점에서 계속될 수 있도록 저장해야 하는 작업에서 사용하는 최소 데이터 집합.

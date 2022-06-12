@@ -1,21 +1,27 @@
 <div align="center">
 
-  <h1>The Rust and WebAssembly Book</h1>
+  <h1>The Rust and WebAssembly Book 한국어 비공식 번역</h1>
+
+  <strong>이 글은 다음 [책](https://github.com/rustwasm/book)을 임의로 국역한 것입니다. </strong>
+
+This is a unofficial translation of the following [book](https://github.com/rustwasm/book).
+
+---
+---
 
   <strong>이 작은 책에는  Rust와 WebAssembly를 사용하는 방법이 담겨 있습니다. 훌륭한 예제와 함께 말이죠.</strong>
 
-  <strong>이 글은 다음 [레포](https://github.com/rustwasm/book)를 번역한 것입니다. </strong>
+
 
   <h3>
-    <a href="https://esctabcapslock.github.io/rustwasmbook/">책 읽기</a>
+    <a href="https://esctabcapslock.github.io/rustwasmbook-ko/">책 읽기</a>
     <span> | </span>
     <a href="https://github.com/rustwasm/book/blob/master/CONTRIBUTING.md">기여</a>
     <span> | </span>
-    <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
+    <a href="https://github.com/rustwasm/book">원본</a>
   </h3>
 
-  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub><br>
-  <sub>Translate into Korean with by <a href="github.com/esctabcapslock">esctabcapslock</a></sub>
+  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
 </div>
 
 ## About
@@ -68,4 +74,4 @@ to read them then you can read them from the `src` directory.
 
 [mdbook]: https://github.com/rust-lang-nursery/mdBook
 [rustup]: https://github.com/rust-lang-nursery/rustup.rs/
-[book]: https://esctabcapslock.github.io/rustwasmbook/game-of-life/introduction.html
+[book]: https://esctabcapslock.github.io/rustwasmbook-ko/game-of-life/introduction.html
